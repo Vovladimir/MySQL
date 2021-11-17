@@ -1,0 +1,63 @@
+2. **Создайте базу данных example, разместите в ней таблицу users, состоящую из двух столбцов, числового id и строкового name.**
+
+
+mysql> CREATE DATABASE example;
+Query OK, 1 row affected (0.15 sec)
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| example            |
+| gb_test_1          |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| stepik_trip        |
+| sys                |
+| test1              |
+| test_1             |
+| world              |
++--------------------+
+11 rows in set (0.00 sec)
+
+mysql> CREATE TABLE users(id INT, name VARCHAR(100));
+ERROR 1046 (3D000): No database selected
+mysql> USE example;
+Database changed
+mysql> CREATE TABLE users(id INT, name VARCHAR(100));
+Query OK, 0 rows affected (3.60 sec)
+
+mysql> SHOW TABLES;
++-------------------+
+| Tables_in_example |
++-------------------+
+| users             |
++-------------------+
+1 row in set (0.00 sec)
+
+3. **Создайте дамп базы данных example из предыдущего задания, разверните содержимое дампа в новую базу данных sample.**
+
+C:\Users\Дмитрий>mysqldump example > sample
+
+mysql> CREATE DATABASE sample;
+Query OK, 1 row affected (3.69 sec)
+
+mysql> exit
+Bye
+
+C:\Users\Дмитрий>mysql sample < sample
+mysql> SHOW TABLES FROM sample;
++------------------+
+| Tables_in_sample |
++------------------+
+| users            |
++------------------+
+1 row in set (0.42 sec)
+
+
+4. (**по желанию) Ознакомьтесь более подробно с документацией утилиты mysqldump. Создайте дамп единственной таблицы help_keyword базы данных mysql. Причем добейтесь того, чтобы дамп содержал только первые 100 строк таблицы.**
+
+C:\Users\Дмитрий>mysqldump --where="true limit 100" mysql help_keyword > mysql_help_keyword_head_100.sql
+
